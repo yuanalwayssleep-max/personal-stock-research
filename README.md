@@ -34,13 +34,13 @@ cd /Users/cocoon/Documents/code/personal-stock-research
 /Users/cocoon/.local/bin/python3.11 -m venv .venv
 source .venv/bin/activate
 pip install -e '.[dev]'
-uvicorn backend.app.main:app --reload --host 0.0.0.0 --port 8000
+uvicorn backend.app.main:app --reload --host 0.0.0.0 --port 8010
 ```
 
 API 文档：
 
 ```text
-http://localhost:8000/docs
+http://localhost:8010/docs
 ```
 
 ## 前端启动
@@ -57,10 +57,10 @@ npm run dev
 http://localhost:5174
 ```
 
-如果后端不是 `http://localhost:8000`，可设置：
+如果后端不是 `http://localhost:8010`，可设置：
 
 ```bash
-VITE_API_BASE=http://localhost:8000 npm run dev
+VITE_API_BASE=http://localhost:8010 npm run dev
 ```
 
 ## MVP-1 功能
