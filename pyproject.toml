@@ -1,0 +1,19 @@
+[project]
+name = "personal-stock-research"
+version = "0.1.0"
+description = "Personal stock research system with data fetching, indicators, backtesting, notes, and dashboard."
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "yfinance>=0.2.40",
+    "streamlit>=1.36",
+    "plotly>=5.22",
+    "duckdb>=1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]

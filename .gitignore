@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.streamlit/
+data/*.db
+data/raw/*.csv
+data/processed/*.csv
+
+# Build artifacts
+*.egg-info/
