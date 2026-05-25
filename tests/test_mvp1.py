@@ -4,10 +4,10 @@ from datetime import date, timedelta
 
 import pandas as pd
 
-from stock_research.data_sources.csv_source import load_daily_bars_csv, load_stocks_csv
-from stock_research.factors import build_basic_factors
-from stock_research.storage import ResearchRepository, init_db
-from stock_research.universe import build_universe
+from stock_research.infrastructure.data_sources.csv_source import load_daily_bars_csv, load_stocks_csv
+from stock_research.domain.services.factors import build_basic_factors
+from stock_research.infrastructure.persistence import ResearchRepository, init_db
+from stock_research.domain.services.universe import build_universe
 
 
 def test_csv_bool_parsing_and_code_normalization(tmp_path):

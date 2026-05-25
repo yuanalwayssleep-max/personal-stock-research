@@ -7,8 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from stock_research.data_sources import load_daily_bars_csv, load_stocks_csv, load_valuation_csv
-from stock_research.storage import ResearchRepository
+from stock_research.application.use_cases import import_csv_data
 
 
 def main() -> None:
@@ -19,16 +18,18 @@ def main() -> None:
     parser.add_argument("--valuation")
     args = parser.parse_args()
 
-    repo = ResearchRepository(args.db)
+    result = import_csv_data(
+        args.db,
+        stocks_path=args.stocks,
+        daily_bars_path=args.daily_bars,
+        valuation_path=args.valuation,
+    )
     if args.stocks:
-        count = repo.write_stocks(load_stocks_csv(args.stocks))
-        print(f"Imported stocks: {count}")
+        print(f"Imported stocks: {result.stocks}")
     if args.daily_bars:
-        count = repo.write_daily_bars(load_daily_bars_csv(args.daily_bars))
-        print(f"Imported daily bars: {count}")
+        print(f"Imported daily bars: {result.daily_bars}")
     if args.valuation:
-        count = repo.write_valuation_daily(load_valuation_csv(args.valuation))
-        print(f"Imported valuation rows: {count}")
+        print(f"Imported valuation rows: {result.valuation}")
 
 
 if __name__ == "__main__":

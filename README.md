@@ -66,6 +66,28 @@ cd /Users/cocoon/Documents/code/personal-stock-research
 4. 增加 AI 研报摘要、财报电话会纪要和投研模板。
 5. 增加定时任务，每日收盘后自动刷新观察列表。
 
+
+## 标准化架构
+
+项目采用标准分层架构：
+
+```text
+interfaces -> application -> domain
+interfaces -> application -> infrastructure
+application -> domain
+application -> infrastructure
+```
+
+MVP 只限制功能范围，不降低架构标准。当前标准目录包括：
+
+- `src/stock_research/domain/`：核心投研规则，例如股票池过滤、因子计算
+- `src/stock_research/application/`：业务用例编排，例如导入数据、构建 MVP-1
+- `src/stock_research/infrastructure/`：DuckDB、CSV、未来 AkShare/Tushare 等外部适配
+- `src/stock_research/interfaces/`：CLI、Web、未来 API 入口
+- `src/stock_research/shared/`：路径、配置和通用基础能力
+
+详细说明见：`docs/architecture/standardized-architecture-v0.2.md`。
+
 ## MVP-1：A 股数据与因子基础
 
 当前已加入 MVP-1 的基础模块：
