@@ -54,7 +54,7 @@ npm run dev
 前端地址：
 
 ```text
-http://localhost:5173
+http://localhost:5174
 ```
 
 如果后端不是 `http://localhost:8000`，可设置：
