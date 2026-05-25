@@ -2,13 +2,20 @@
 __pycache__/
 *.pyc
 .DS_Store
-.streamlit/
 .pytest_cache/
+
+# Python build artifacts
+*.egg-info/
+dist/
+build/
+
+# Local app data
 data/*.db
 data/*.duckdb
 data/raw/*.csv
 data/processed/*.csv
 data/processed/*.duckdb
 
-# Build artifacts
-*.egg-info/
+# Frontend
+frontend/node_modules/
+frontend/dist/
