@@ -65,3 +65,38 @@ cd /Users/cocoon/Documents/code/personal-stock-research
 3. 加入组合层面的仓位、风险暴露和归因分析。
 4. 增加 AI 研报摘要、财报电话会纪要和投研模板。
 5. 增加定时任务，每日收盘后自动刷新观察列表。
+
+## MVP-1：A 股数据与因子基础
+
+当前已加入 MVP-1 的基础模块：
+
+- DuckDB 本地数据库 schema 初始化
+- A 股股票、日行情、估值 CSV 导入
+- 可交易股票池过滤
+- 基础动量、波动率、流动性、趋势和估值因子计算
+
+初始化数据库：
+
+```bash
+./.venv/bin/python scripts/init_db.py --db data/processed/research.duckdb
+```
+
+导入 CSV 数据：
+
+```bash
+./.venv/bin/python scripts/import_csv_data.py \
+  --db data/processed/research.duckdb \
+  --stocks data/raw/stocks.csv \
+  --daily-bars data/raw/daily_bars.csv \
+  --valuation data/raw/valuation.csv
+```
+
+生成指定交易日的股票池和基础因子：
+
+```bash
+./.venv/bin/python scripts/build_mvp1.py \
+  --db data/processed/research.duckdb \
+  --trade-date 2024-06-07
+```
+
+CSV 字段可使用英文列名或部分中文列名。股票代码会规范化为 `000001.SZ`、`600519.SH` 这类格式。
