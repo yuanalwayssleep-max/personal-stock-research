@@ -91,13 +91,7 @@ def build_mvp1_endpoint(request: BuildMvp1Request) -> BuildMvp1Response:
 def data_status() -> dict[str, Any]:
     repo = ResearchRepository(get_db_path())
     tables = ["stocks", "daily_bars", "valuation_daily", "universe_members", "factor_values"]
-    status = {}
-    for table in tables:
-        try:
-            df = repo.query(f"SELECT COUNT(*) AS rows FROM {table}")
-            status[table] = int(df.loc[0, "rows"])
-        except Exception:
-            status[table] = None
+    status = repo.table_counts(tables)
     latest_dates = {}
     for table, column in [("daily_bars", "trade_date"), ("universe_members", "trade_date"), ("factor_values", "trade_date")]:
         try:
@@ -105,7 +99,12 @@ def data_status() -> dict[str, Any]:
             latest_dates[table] = _json_ready(df.loc[0, "latest_date"])
         except Exception:
             latest_dates[table] = None
-    return {"db_path": str(get_db_path()), "tables": status, "latest_dates": latest_dates}
+    return {
+        "db_path": str(get_db_path()),
+        "schema_version": repo.latest_schema_version(),
+        "tables": status,
+        "latest_dates": latest_dates,
+    }
 
 
 @router.get("/universe")

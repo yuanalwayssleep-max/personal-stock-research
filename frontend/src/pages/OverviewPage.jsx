@@ -26,6 +26,7 @@ export function OverviewPage({ status, health, onRefresh, busy }) {
           <div className="key-value"><span>日行情</span><strong>{latest.daily_bars ?? '-'}</strong></div>
           <div className="key-value"><span>股票池</span><strong>{latest.universe_members ?? '-'}</strong></div>
           <div className="key-value"><span>因子</span><strong>{latest.factor_values ?? '-'}</strong></div>
+          <div className="key-value"><span>Schema</span><strong>{status?.schema_version ?? '-'}</strong></div>
         </div>
         <div className="panel agenda-panel">
           <h2>当前阶段待办</h2>
